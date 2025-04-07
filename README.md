@@ -22,7 +22,7 @@ This is a full-stack web application built for a technical screening assignment.
 
 | Layer      | Tech Used                         |
 |------------|-----------------------------------|
-| Frontend   | Angular 17 (Standalone Components, Reactive Forms, HttpClient) |
+| Frontend   | Angular 17 (Standalone Components, Reactive Forms) |
 | Backend    | .NET 8 Web API with ASP.NET Core  |
 | Database   | SQLite + Entity Framework Core    |
 | Styling    | Plain CSS (custom card layout)    |
@@ -44,17 +44,24 @@ This is a full-stack web application built for a technical screening assignment.
    ```bash
    cd backend
 
-2. Backend runs on: `http://localhost:5175`
+2. Run the backend:
+   ```bash
+   dotnet run
+
+3. The API runs at: `http://localhost:5175`
 Make sure you have .NET 8 SDK installed.
 
 ### Frontend (Angular)
 
 1. Navigate to frontend directory
+   ```bash
+   cd frontend
+
 2. Install dependencies (if not already):
    ```bash
    npm install
 
-3. Run the Angular app:
+3. Run the app:
    ```bash
    ng serve
 4. Open your browser: `http://localhost:4200`
@@ -64,7 +71,7 @@ Make sure you have .NET 8 SDK installed.
 - **Estimated Time:** 4 hours  
 - **Actual Time Spent:** 8 hours
 
-Extra time was spent on polishing the UI, testing edge cases, improving user experience, validating files, and ensuring the form resets smoothly.
+I spent extra time refining the UI, handling edge cases, validating files, resetting the form state properly, and resolving technical issues like CORS and HTTPS delays.
 
 ## Business Rules & Assumptions
 - All fields are required (purchase date, amount, description, file)
@@ -85,7 +92,7 @@ Extra time was spent on polishing the UI, testing edge cases, improving user exp
 - CORS enabled to allow frontend-backend communication
 - Clean UI layout with clear title and structured form
 
-## Comments (Optional)
+## Comments
 ## Assumptions Made
 - One receipt per submission
 - Files can be stored locally in the backend server
@@ -94,8 +101,8 @@ Extra time was spent on polishing the UI, testing edge cases, improving user exp
 ## Problems Encountered & Solved
 - File input did not reset after submission — fixed with manual DOM reset
 - Success alert was intrusive — replaced with an inline success message for better UX
-- Backend delay due to HTTPS redirection — resolved by commenting out app.UseHttpsRedirection()
-- CORS issue while connecting Angular to .NET backend — resolved by enabling CORS in Program.cs
+- Backend was slow due to HTTPS → disabled UseHttpsRedirection in dev
+- Angular → .NET requests blocked → fixed with CORS in Program.cs
 - File upload initially allowed any type — added frontend validation and accept attribute to restrict to .pdf, .jpg, .jpeg, .png
 - Uploaded PDF looked corrupted — clarified that it’s expected binary content and confirmed it displays correctly in PDF viewers
 
