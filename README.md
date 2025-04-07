@@ -11,10 +11,10 @@ This is a full-stack web application built for a technical screening assignment.
 - Enter description of the purchase
 - Upload a receipt file (PDF, PNG, JPG only)
 - Validates file type and limits size to max 5MB
-- Success message is displayed
+- Success message is displayed after submission
 - Form and file input are cleared after successful submission
-- Receipt data stored in SQLite database
-- Uploaded files saved to `wwwroot/uploads` folder on backend
+- Receipt data is stored in SQLite database
+- Uploaded files are saved to `wwwroot/uploads` on the backend
 
 ---
 
@@ -27,10 +27,12 @@ This is a full-stack web application built for a technical screening assignment.
 | Database   | SQLite + Entity Framework Core    |
 | Styling    | Plain CSS (custom card layout)    |
 
-I chose Angular and .NET because:
-- They're modern and robust technologies used widely in enterprise apps
-- I’m comfortable using them in real-world, structured projects
-- They align well with the technologies mentioned in the task prompt
+### Why I chose this stack
+
+- Angular and .NET are modern, enterprise-grade frameworks
+- The stack provides clean separation between frontend and backend
+- It's aligned with the technologies mentioned in the task description
+- I'm comfortable and productive with both Angular and .NET
 
 ---
 
@@ -38,7 +40,67 @@ I chose Angular and .NET because:
 
 ### Backend (.NET)
 
-1. Navigate to `backend/`
-2. Run the app:
+1. Open a terminal and navigate to the backend directory:
    ```bash
-   dotnet run
+   cd backend
+
+2. Backend runs on: `http://localhost:5175`
+Make sure you have .NET 8 SDK installed.
+
+### Frontend (Angular)
+
+1. Navigate to frontend directory
+2. Install dependencies (if not already):
+   ```bash
+   npm install
+
+3. Run the Angular app:
+   ```bash
+   ng serve
+4. Open your browser: `http://localhost:4200`
+
+## Time Tracking
+
+- **Estimated Time:** 4 hours  
+- **Actual Time Spent:** 8 hours
+
+Extra time was spent on polishing the UI, testing edge cases, improving user experience, validating files, and ensuring the form resets smoothly.
+
+## Business Rules & Assumptions
+- All fields are required (purchase date, amount, description, file)
+- Amount must be greater than 0
+- Only file types allowed: .pdf, .jpg, .jpeg, .png
+- Maximum file size: 5MB
+- File names are saved using GUIDs to avoid conflicts
+- Files are stored in wwwroot/uploads
+- Purchase date should not be in the future (assumed, not enforced)
+
+## Coding Practices & Highlights
+- Used Angular Reactive Forms for strong validation and control
+- Handled file input reset after submission (often overlooked)
+- Displayed success message inline (not just alert())
+- Validated file size and type before submission
+- Used DTO in backend to cleanly receive multipart form data
+- Automatically creates the uploads folder if it doesn't exist
+- CORS enabled to allow frontend-backend communication
+- Clean UI layout with clear title and structured form
+
+## Comments (Optional)
+## Assumptions Made
+- One receipt per submission
+- Files can be stored locally in the backend server
+- Database is pre-created using EF Core migrations
+
+## Problems Encountered & Solved
+- File input did not reset after submission — fixed with manual DOM reset
+- Success alert was intrusive — replaced with an inline success message for better UX
+- Backend delay due to HTTPS redirection — resolved by commenting out app.UseHttpsRedirection()
+- CORS issue while connecting Angular to .NET backend — resolved by enabling CORS in Program.cs
+- File upload initially allowed any type — added frontend validation and accept attribute to restrict to .pdf, .jpg, .jpeg, .png
+- Uploaded PDF looked corrupted — clarified that it’s expected binary content and confirmed it displays correctly in PDF viewers
+
+## Highlights in the Code
+- Separation of concerns with DTOs and EF entities
+- Clean, professional styling using custom CSS
+- Clear structure in both frontend and backend folders
+- User-friendly interactions (filename display, inline messages)
